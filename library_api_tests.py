@@ -9,7 +9,7 @@ import json
 
 def setup():
     global app
-    app = TestApp(app)
+    app = TestApp(application)
 
 def test_main_entry_point_has_key_elements():
     res = app.get('/library/api')
@@ -25,16 +25,16 @@ def test_no_book_found_throws_404():
 
 def test_new_book_works():
     bk = dict(title="TITLE", description="DESCRIPTION", isbn="ISBN")
-    res = app.put_json('/library/api/books/12345', bk, {'Content-Type': 'application/json; charset=utf-8'})
+    res = app.put_json('/library/api/books/12345', bk)
     assert_equals(res.status_code, 201)
     assert_equals(res.headers['Location'], 'http://localhost/library/api/books/ISBN')
     assert_equals(res.json['isbn'], 'ISBN')
 
 def test_update_book_works():
     bk = dict(title="TITLE", description="DESCRIPTION", isbn="ISBN")
-    res = app.put_json('/library/api/books/12345', bk, {'Content-Type': 'application/json; charset=utf-8'})
+    res = app.put_json('/library/api/books/12345', bk)
     bk['title'] = 'NEW TITLE'
-    res = app.put_json('/library/api/books/12345', bk, {'Content-Type': 'application/json; charset=utf-8'})
+    res = app.put_json('/library/api/books/12345', bk)
     assert_equals(res.status_code, 200)
     assert_equals(res.headers['Location'], 'http://localhost/library/api/books/ISBN')
     assert_equals(res.json['title'], 'NEW TITLE')

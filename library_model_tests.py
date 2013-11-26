@@ -2,7 +2,7 @@
 import nose
 from nose.tools import raises, assert_equals, assert_in, assert_not_in, assert_is_not_none, assert_is_none
 from nose.plugins.skip import SkipTest
-import pyDoubles.framework as mock
+import doublex as mock
 import json
 
 from library_models import (Repository, Book, AlreadyOnLoanError, BorrowingWhileReservedError,
