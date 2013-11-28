@@ -43,7 +43,8 @@ class Repository(object):
                 break
         return ret
     def store(self, book):
-        self.books.append(book)
+        if not book in self.books:
+            self.books.append(book)
 
 # ----------------------------------------------------------------------
 
